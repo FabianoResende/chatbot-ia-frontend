@@ -25,7 +25,7 @@ async function enviarMensagem() {
 
     try {
         // 2. Faz a chamada para o seu backend correto do Render
-        const response = await fetch('https://chatbot-gemini-backend-m8a1.onrender.com/chat', {
+        const response = await fetch('https://chatbot-gemini-backend-nb0t.onrender.com/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
