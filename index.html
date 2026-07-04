@@ -2,39 +2,20 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot IA - Fabiano</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="app">
-        <header>
-            <h1>Chatbot IA</h1>
-            <p>Projeto Frontend + IA por Fabiano Faria de Resende</p>
-        </header>
 
-        <main>
-            <div class="chat-container">
-                <div id="chat-output" class="chat-output">
-                    <div class="message bot">Olá! Sou um chatbot de IA. O que você quer perguntar?</div>
-                </div>
-                
-                <div class="chat-input-area">
-                    <input type="text" id="input-texto" placeholder="Digite sua pergunta..." onkeypress="verificarEnter(event)">
-                    <button id="btn-enviar" onclick="enviarMensagem()">Enviar</button>
-                </div>
-            </div>
-        </main>
+    <h1>Chatbot IA</h1>
+    <p>Projeto Frontend + IA por Fabiano Faria de Resende</p>
 
-        <footer>
-            <p>Estagiário de Engenharia de IA — FlyRank</p>
-        </footer>
-    </div>
+    <div id="chat-output" class="chat-window"></div>
 
-    <script href="script.js"></script>
+    <input id="input-texto" type="text" placeholder="Digite sua pergunta..." onkeydown="verificarEnter(event)">
+    <button onclick="enviarMensagem()">Enviar</button>
+
     <script src="script.js"></script>
+
 </body>
 </html>
