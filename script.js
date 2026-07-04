@@ -24,22 +24,22 @@ async function enviarMensagem() {
     inputTexto.value = ""; // Limpa o campo de entrada
 
     try {
-        // 2. Faz a chamada para o seu backend correto do Render
+        // 2. Faz a chamada para o backend no Render
         const response = await fetch("https://chatbot-croq-backend.onrender.com/chat", {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({ prompt: inputDeTexto })
         });
 
         const data = await response.json();
-        
-        // 3. Exibe a resposta do Gemini vinda do servidor
-        exibirMensagemNaTela(data.answer, 'bot');
+
+        // 3. Exibe a resposta da IA vinda do servidor
+        exibirMensagemNaTela(data.answer, "bot");
 
     } catch (error) {
         console.error("Erro ao conversar com o backend:", error);
-        exibirMensagemNaTela("Erro ao conectar com a IA. Verifique sua internet.", 'bot');
+        exibirMensagemNaTela("Erro ao conectar com a IA. Verifique sua internet.", "bot");
     }
 }
