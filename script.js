@@ -4,7 +4,7 @@ function exibirMensagemNaTela(texto, remetente) {
     novaMensagem.className = `message ${remetente}`;
     novaMensagem.innerText = texto;
     chatOutput.appendChild(novaMensagem);
-    chatOutput.scrollTop = chatOutput.scrollHeight; // Rola para o final automaticamente
+    chatOutput.scrollTop = chatOutput.scrollHeight;
 }
 
 function verificarEnter(event) {
@@ -19,12 +19,10 @@ async function enviarMensagem() {
 
     if (!inputDeTexto) return;
 
-    // 1. Mostra a mensagem do usuário na tela
     exibirMensagemNaTela(inputDeTexto, "user");
-    inputTexto.value = ""; // Limpa o campo de entrada
+    inputTexto.value = "";
 
     try {
-        // 2. Faz a chamada para o backend no Render
         const response = await fetch("https://chatbot-croq-backend.onrender.com/chat", {
             method: "POST",
             headers: {
@@ -35,7 +33,6 @@ async function enviarMensagem() {
 
         const data = await response.json();
 
-        // 3. Exibe a resposta da IA vinda do servidor
         exibirMensagemNaTela(data.answer, "bot");
 
     } catch (error) {
