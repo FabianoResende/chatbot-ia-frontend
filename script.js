@@ -1,8 +1,11 @@
 function exibirMensagemNaTela(texto, remetente) {
     const chatOutput = document.getElementById("chat-output");
     const novaMensagem = document.createElement("div");
-    novaMensagem.className = `message ${remetente}`;
-    novaMensagem.innerText = texto;
+
+    // Classes corrigidas
+    novaMensagem.className = `message message_${remetente}`;
+    novaMensagem.textContent = texto;
+
     chatOutput.appendChild(novaMensagem);
     chatOutput.scrollTop = chatOutput.scrollHeight;
 }
@@ -15,28 +18,37 @@ function verificarEnter(event) {
 
 async function enviarMensagem() {
     const inputTexto = document.getElementById("input-texto");
-    const inputDeTexto = inputTexto.value.trim();
+    const texto = inputTexto.value.trim();
 
-    if (!inputDeTexto) return;
+    if (!texto) return;
 
-    exibirMensagemNaTela(inputDeTexto, "user");
+    exibirMensagemNaTela(texto, "user");
     inputTexto.value = "";
+
+    // Feedback visual
+    exibirMensagemNaTela("...", "bot");
 
     try {
         const response = await fetch("https://chatbot-croq-backend.onrender.com/chat", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ prompt: inputDeTexto })
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: texto })
         });
 
         const data = await response.json();
 
-        exibirMensagemNaTela(data.answer, "bot");
+        // Remove o "..."
+        const chatOutput = document.getElementById("chat-output");
+        chatOutput.lastChild.remove();
+
+        exibirMensagemNaTela(data.answer || "Sem resposta da IA no momento.", "bot");
 
     } catch (error) {
         console.error("Erro ao conversar com o backend:", error);
-        exibirMensagemNaTela("Erro ao conectar com a IA. Verifique sua internet.", "bot");
+
+        const chatOutput = document.getElementById("chat-output");
+        chatOutput.lastChild.remove();
+
+        exibirMensagemNaTela("Erro ao conectar com a IA.", "bot");
     }
 }
