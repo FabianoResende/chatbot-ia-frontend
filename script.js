@@ -4,7 +4,7 @@ function exibirMensagemNaTela(texto, remetente) {
     novaMensagem.className = `message ${remetente}`;
     novaMensagem.innerText = texto;
     chatOutput.appendChild(novaMensagem);
-    chatOutput.scrollTop = chatOutput.scrollHeight; // Rola para o final automaticamente
+    chatOutput.scrollTop = chatOutput.scrollHeight;
 }
 
 function verificarEnter(event) {
@@ -19,27 +19,22 @@ async function enviarMensagem() {
 
     if (!inputDeTexto) return;
 
-    // 1. Mostra a mensagem do usuário na tela
     exibirMensagemNaTela(inputDeTexto, "user");
-    inputTexto.value = ""; // Limpa o campo de entrada
+    inputTexto.value = "";
 
     try {
-        // 2. Faz a chamada para o seu backend correto do Render
-        const response = await fetch('https://chatbot-gemini-backend-nb0t.onrender.com/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ prompt: inputDeTexto })
-        });
+        const response = await fetch("https://chatbot-ia-backend-my5l.onrender.com/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ prompt: message })
+});
 
         const data = await response.json();
-        
-        // 3. Exibe a resposta do Gemini vinda do servidor
-        exibirMensagemNaTela(data.answer, 'bot');
+
+        exibirMensagemNaTela(data.answer, "bot");
 
     } catch (error) {
         console.error("Erro ao conversar com o backend:", error);
-        exibirMensagemNaTela("Erro ao conectar com a IA. Verifique sua internet.", 'bot');
+        exibirMensagemNaTela("Erro ao conectar com a IA. Verifique sua internet.", "bot");
     }
 }
