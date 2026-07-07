@@ -51,3 +51,4 @@ async function enviarMensagem() {
         exibirMensagemNaTela("Erro ao conectar com a IA.", "bot");
     }
 }
+ 
