@@ -45,7 +45,6 @@ async function enviarMensagem() {
 
     } catch (error) {
         console.error("Erro ao conversar com o backend:", error);
-
         const chatOutput = document.getElementById("chat-output");
         chatOutput.lastChild.remove();
 
