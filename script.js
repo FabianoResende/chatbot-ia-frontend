@@ -29,11 +29,12 @@ async function enviarMensagem() {
     exibirMensagemNaTela("...", "bot");
 
     try {
-        const response = await fetch("https://chatbot-croq-backend.onrender.com/chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ prompt: texto })
-        });
+        const response = await fetch("https://chatbot-ia-backend-my5l.onrender.com/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ prompt: message })
+});
+
 
         const data = await response.json();
 
